@@ -15,6 +15,11 @@ function ChatCardTitleInput() {
       onBlur={() => {
         updateTitle(title);
       }}
+      onKeyDown={(e) => {
+        if (e.keyCode == 13) {
+          updateTitle(title);
+        }
+      }}
       autoFocus
     />
   );
