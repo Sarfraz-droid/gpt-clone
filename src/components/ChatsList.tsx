@@ -44,7 +44,7 @@ function ChatsList(props: IProps) {
   const ref = useRef<HTMLDivElement>();
   const [isOpen, setIsOpen] = useState(true);
 
-  const [chatData, setChatData] = useState<Chats[]>(props.chats);
+  const [chatData, setChatData] = useState<Chats[]>(props.chats || []);
   const [selectedChat, setSelectedChat] = useState<ISelectedChat>({
     edit: false,
     showDropdown: false,
@@ -105,21 +105,8 @@ function ChatsList(props: IProps) {
   };
 
   useEffect(() => {
-    window.document?.addEventListener(
-      "chat_list",
-      (e: any) => {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        // console.log(e.detail?.chat);
-        if (e.detail?.chat) {
-          setChatData([e.detail?.chat, ...chatData]);
-        }
-      },
-      false
-    );
-
-    return () => window.document?.removeEventListener("chat_list", () => {});
-  }, [chatData]);
+    setChatData(props.chats);
+  }, [props.chats]);
 
   return (
     <ChatContext.Provider

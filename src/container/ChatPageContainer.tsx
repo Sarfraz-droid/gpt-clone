@@ -52,16 +52,7 @@ function ChatPageContainer(props: IProps) {
     if (data.chat) {
       setCurrentChatId(data.chat.id);
 
-      const evt = new CustomEvent("chat_list", {
-        detail: {
-          chat: data.chat,
-        },
-        bubbles: false,
-        cancelable: true,
-      });
-      // console.log("Dispatching Event");
-
-      window.document.dispatchEvent(evt);
+      router.refresh();
     }
   };
 
