@@ -74,6 +74,12 @@ export const updateChat = async (chat: Chats) => {
 };
 
 export const deleteChat = async (chatId: number) => {
+  await prisma.message.deleteMany({
+    where: {
+      chatId,
+    },
+  });
+
   const data = await prisma.chat.delete({
     where: {
       id: chatId,
